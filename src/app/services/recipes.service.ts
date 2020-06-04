@@ -9,7 +9,7 @@ import { IngredientsService } from './ingredients.service';
 })
 export class RecipesService {
 
-  constructor(private ingredientsService :  IngredientsService) { }
+  constructor(private ingredientsService:  IngredientsService) { }
 
   getRecipes()  : Recipe[]{
     let ingredients : Array<Ingredient> = this.ingredientsService.getIngredients();
@@ -26,8 +26,8 @@ export class RecipesService {
       }
     }
     let r1 : Recipe = {id: 1, name: 'bread', description: 'abc', ingredients: recipeIngredients};
-    let r2 : Recipe = {id: 2, name: 'pancakes', description: 'bcd', ingredients: recipeIngredients};
-    let r3 : Recipe = {id: 3, name: 'pizza', description: 'cde', ingredients: recipeIngredients};
+    let r2 : Recipe = {id: 2, name: 'pancakes', description: 'bcd', ingredients: recipeIngredients.slice() };
+    let r3 : Recipe = {id: 3, name: 'pizza', description: 'cde', ingredients: recipeIngredients.slice()};
     let recipes : Recipe[] = [r1,r2,r3];
     return recipes;
   }

@@ -2,7 +2,7 @@
     <div>
     <h2 style="margin-left: 16px;">My Recipes</h2>
     <mat-selection-list  (selectionChange)="handleSelection($event)" class="selectionList">
-        <mat-list-option *ngFor="let recipe of recipes" value="recipe.name"> 
+        <mat-list-option *ngFor="let recipe of recipes" [value]="recipe"> 
                 {{recipe.name}}
         </mat-list-option>
     </mat-selection-list>

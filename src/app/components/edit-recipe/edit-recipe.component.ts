@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
-import {MatSelectModule} from '@angular/material/select';
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 
 @Component({
@@ -11,8 +10,8 @@ import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
   styleUrls: ['./edit-recipe.component.scss']
 })
 export class EditRecipeComponent implements OnInit {
-
-  currentRecipe: Recipe;
+  
+  @Input() currentRecipe: Recipe;
   ingredients: Array<Ingredient>;
   currentIngredient: RecipeIngredient;
 
@@ -20,7 +19,7 @@ export class EditRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.ingredients=this.ingredientServ.getIngredients();
-    
+     
     this.currentRecipe={
         id: 1,
         name: 'recipe',
@@ -35,11 +34,23 @@ export class EditRecipeComponent implements OnInit {
           quantity: 2      
         }  ]
       }
+
     this.currentIngredient = {
         id: this.getNewRecipeIngredientId(),
         ingredient:this.ingredients[1],
-        quantity: 0      
+        quantity: 0,
       }  
+  }
+
+  ngOnChanges(change : SimpleChange){
+      if (change["currentRecipe"].currentValue){       
+        var newIngredients=change["currentRecipe"].currentValue.ingredients;
+        newIngredients.forEach(element =>{
+          console.log(element);
+          if (this.ingredients && !this.ingredients.includes(element.ingredient))
+            this.ingredients.push(element.ingredient);
+        });
+      }
   }
 
   removeIngredient(recipeIngredient){  
@@ -77,6 +88,9 @@ export class EditRecipeComponent implements OnInit {
       quantity: 0      
     }  
     console.log(this.currentRecipe)
+  }
+  onChangedRecipe(someRecipe : Recipe){
+    this.currentRecipe = someRecipe;
   }
 
 }

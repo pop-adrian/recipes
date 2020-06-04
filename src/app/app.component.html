@@ -5,7 +5,7 @@
   </h1>  
 </div>
 
-<app-recipe-list></app-recipe-list>
-<app-edit-recipe></app-edit-recipe>
+<app-recipe-list (selectedRecipeChanged)="recipeChanged($event)"></app-recipe-list>
+<app-edit-recipe [currentRecipe]="selectedRecipe"></app-edit-recipe>
 
 <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-<h1>Current recipe ingredients</h1>
+<h2>Current recipe ingredients</h2>
 <div *ngIf="currentRecipe">
     <div *ngFor="let recipeIngredient of currentRecipe.ingredients">
         
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<h1>Add new ingredients</h1>
+<h2>Add new ingredients</h2>
 <mat-form-field >
     <mat-select *ngIf="ingredients" [(value)]="currentIngredient.ingredient">
         <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>

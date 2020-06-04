@@ -25,6 +25,7 @@ export class IngredientsService {
       id: 4,
       name: 'potatoes'
     }
+   
     var list = new Array();
     list.push(ingredient1);
     list.push(ingredient2);
