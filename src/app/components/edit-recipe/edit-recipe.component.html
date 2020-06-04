@@ -1,0 +1,26 @@
+<h1>Current recipe ingredients</h1>
+<div *ngIf="currentRecipe">
+    <div *ngFor="let recipeIngredient of currentRecipe.ingredients">
+        
+        <mat-form-field value="recipeIngredient">
+            <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredient">
+                <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                    {{ingredient.name}}  </mat-option>
+            </mat-select>
+        </mat-form-field>      
+            <label>Quantity: </label>
+            <input type="number" [(ngModel)]="recipeIngredient.quantity">
+            <button (click)="removeIngredient(recipeIngredient.ingredient)">Remove Ingredient</button>
+    </div>
+</div>
+
+<h1>Add new ingredients</h1>
+<mat-form-field >
+    <mat-select *ngIf="ingredients" [(value)]="currentIngredient.ingredient">
+        <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>
+    </mat-select>
+</mat-form-field> 
+    <label>Quantity: </label>
+    <input type="number" [(ngModel)]="currentIngredient.quantity" >
+    <button mat-button (click)="addIngredient()">Add new Ingredient</button>
+
