@@ -22,6 +22,11 @@ export class RecipesService {
  }
 
   getRecipes(): Recipe[]{
+    try{
+      const recipes = JSON.parse(localStorage.getItem('recipes'));
+      return recipes;
+    }
+    catch(e){
     const numberOfRecipes = 10;
     const numberOfIngredients = 3;
     const numberOfDescriptionCharacters = 20;
@@ -57,6 +62,8 @@ export class RecipesService {
       recipes.push(recipe);
     }
   }
+    localStorage.setItem('recipes',JSON.stringify(recipes));
     return recipes;
   }
+}
 }
