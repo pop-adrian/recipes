@@ -1,0 +1,21 @@
+<div *ngIf = "recipe">
+    <div>
+    <mat-card class="matCard">
+        <mat-card-header class="matCardHeader">
+            {{recipe.name}}
+        </mat-card-header>
+        <mat-list>
+            <mat-list-item *ngFor="let ingredient of recipe.ingredients">
+                <div class="group">
+                    <div class="a">
+                        {{ingredient.ingredient.name}}
+                    </div> 
+                    <div class="b">
+                        {{ingredient.quantity}}
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+    </div>
+</div>

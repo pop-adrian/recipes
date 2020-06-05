@@ -24,7 +24,6 @@ export class RecipeListComponent implements OnInit {
     if (event.option.selected) {
       event.source.deselectAll();
       event.option._setSelected(true);
-
       this.selectedRecipeChanged.emit(event.option.value);
     }
   }

@@ -11,12 +11,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
 
+import { ShowRecipeComponent } from './components/show-recipe/show-recipe.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     EditRecipeComponent,
+    ShowRecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { MatInputModule } from '@angular/material';
     MatSelectModule,
     FormsModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
