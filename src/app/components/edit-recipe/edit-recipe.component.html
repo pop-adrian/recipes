@@ -1,3 +1,19 @@
+
+<div *ngIf="currentRecipe">
+    <mat-form-field>
+        <mat-label>Name: </mat-label>
+        <input matInput [(ngModel)]="currentRecipe.name" >
+    </mat-form-field>
+</div>
+
+<div *ngIf="currentRecipe">
+    <mat-form-field>
+        <mat-label>Description: </mat-label>
+        <textarea matInput [(ngModel)]="currentRecipe.description" > </textarea>
+    </mat-form-field>
+</div>
+
+
 <div class="editRecipe">
     <div *ngIf="currentRecipe">
         <div *ngFor="let recipeIngredient of currentRecipe.ingredients" class="editContaier">
@@ -14,30 +30,8 @@
             </mat-form-field>
                 <div class="buttonDiv" (click)="removeIngredient(recipeIngredient.ingredient)"><i class="fa fa-times" aria-hidden="true"></i></div>
         </div>
-<h2>Current recipe name</h2>
-<div *ngIf="currentRecipe">
-    <input type="text" [(ngModel)]="currentRecipe.name" id="nameText"><br>
-</div>
 
-<h2>Current recipe description</h2>
-    <div *ngIf="currentRecipe" class="descriptionContainer">
-        <textarea [(ngModel)]="currentRecipe.description" id="descriptionTextArea"></textarea>
-    </div>
 
-<h2>Current recipe ingredients</h2>
-<div *ngIf="currentRecipe">
-    <div *ngFor="let recipeIngredient of currentRecipe.ingredients">
-        
-        <mat-form-field value="recipeIngredient">
-            <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredient">
-                <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
-                    {{ingredient.name}}  </mat-option>
-            </mat-select>
-        </mat-form-field>      
-            <label>Quantity: </label>
-            <input type="number" [(ngModel)]="recipeIngredient.quantity">
-            <button (click)="removeIngredient(recipeIngredient.ingredient)">Remove Ingredient</button>
-    </div>
 
     <mat-divider></mat-divider>
     <br>
