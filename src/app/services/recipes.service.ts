@@ -11,17 +11,18 @@ export class RecipesService {
 
   constructor(private ingredientsService:  IngredientsService) { }
 
-  getRecipes()  : Recipe[]{
-    let ingredients : Array<Ingredient> = this.ingredientsService.getIngredients();
-    let recipeIngredients : RecipeIngredient[] = new Array();
-    let currentIndex=-1;
+  getRecipes(): Recipe[]{
+    const ingredients: Array<Ingredient> = this.ingredientsService.getIngredients();
+    const recipeIngredients: RecipeIngredient[] = new Array();
+    const previousIndexes = new Array();
     for (var i = 0 ; i <3 ;i++){
       var index=Math.floor(Math.random() * ingredients.length)
-      if(currentIndex!=index){
+      var quantity = Math.random() + 2;
+      if(!previousIndexes.includes(index)){
         var ing : Ingredient = ingredients[index];
-        let recipeIngredient : RecipeIngredient = {id:1 , ingredient : ing, quantity: 2};
+        let recipeIngredient : RecipeIngredient = {id:i+1 , ingredient : ing, quantity: quantity};
         recipeIngredients.push(recipeIngredient);
-        currentIndex=index;
+        previousIndexes.push(index);
         console.log(recipeIngredient);
       }
     }
