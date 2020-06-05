@@ -4,6 +4,8 @@
         <mat-card-header class="matCardHeader">
             {{recipe.name}}
         </mat-card-header>
+        <mat-divider></mat-divider>
+        <div>Decription: {{recipe.description}}</div>
         <mat-list>
             <mat-list-item *ngFor="let ingredient of recipe.ingredients">
                 <div class="group">
