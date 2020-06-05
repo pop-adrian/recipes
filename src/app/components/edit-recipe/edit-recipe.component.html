@@ -1,26 +1,33 @@
-<h2>Current recipe ingredients</h2>
-<div *ngIf="currentRecipe">
-    <div *ngFor="let recipeIngredient of currentRecipe.ingredients">
-        
-        <mat-form-field value="recipeIngredient">
-            <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredient">
-                <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
-                    {{ingredient.name}}  </mat-option>
+<div class="editRecipe">
+    <div *ngIf="currentRecipe">
+        <div *ngFor="let recipeIngredient of currentRecipe.ingredients" class="editContaier">
+            
+            <mat-form-field value="recipeIngredient">
+                <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredient">
+                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                        {{ingredient.name}}  </mat-option>
+                </mat-select>
+            </mat-form-field>     
+            <mat-form-field> 
+                <mat-label>Quantity: </mat-label>
+                <input matInput [(ngModel)]="recipeIngredient.quantity">
+            </mat-form-field>
+                <div class="buttonDiv" (click)="removeIngredient(recipeIngredient.ingredient)"><i class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <br>
+    <div class="addContainer">
+        <mat-form-field >
+            <mat-select *ngIf="ingredients" [(value)]="currentIngredient.ingredient">
+                <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>
             </mat-select>
-        </mat-form-field>      
-            <label>Quantity: </label>
-            <input type="number" [(ngModel)]="recipeIngredient.quantity">
-            <button (click)="removeIngredient(recipeIngredient.ingredient)">Remove Ingredient</button>
+        </mat-form-field> 
+        <mat-form-field>
+            <mat-label>Quantity: </mat-label>
+            <input matInput [(ngModel)]="currentIngredient.quantity" >
+        </mat-form-field>
+            <div class="buttonDiv" (click)="addIngredient()"><i class="fa fa-plus" aria-hidden="true"></i></div>
     </div>
 </div>
-
-<h2>Add new ingredients</h2>
-<mat-form-field >
-    <mat-select *ngIf="ingredients" [(value)]="currentIngredient.ingredient">
-        <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>
-    </mat-select>
-</mat-form-field> 
-    <label>Quantity: </label>
-    <input type="number" [(ngModel)]="currentIngredient.quantity" >
-    <button mat-button (click)="addIngredient()">Add new Ingredient</button>
-

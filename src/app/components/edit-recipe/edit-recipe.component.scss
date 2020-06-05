@@ -1,19 +1,23 @@
-button{
-    border: 0;
+.buttonDiv{
     margin-left: 30px;
-    background-color: transparent;
-    font-weight: 500;
     display: inline-block;
     height: 30px;
+    width: 30px;
 }
-button:hover{
-    background-color: rgb(241, 219, 18);
+.buttonDiv:hover{
     cursor: pointer;
 }
-label{
-    margin-left: 30px;
-}
-input{
+.addContainer{
     display: inline-block;
-    width: 40px;
+   
+    display: flex;
+    justify-content: flex-start;
+}
+.editContaier{
+    display: flex;
+    justify-content: flex-start;
+}
+.editRecipe{
+    width: 450px;
+    height: auto;
 }

@@ -4,6 +4,7 @@ import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 
+
 @Component({
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.component.html',

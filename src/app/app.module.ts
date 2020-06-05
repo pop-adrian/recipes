@@ -7,8 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatSelectModule,
     FormsModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
