@@ -11,25 +11,52 @@ export class RecipesService {
 
   constructor(private ingredientsService:  IngredientsService) { }
 
+  createDescription(length) : string{
+    var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
   getRecipes(): Recipe[]{
+    const numberOfRecipes = 10;
+    const numberOfIngredients = 3;
+    const numberOfDescriptionCharacters = 20;
+    const recipeNames = ['bread','pancakes','pizza','apple pie','creme brulee'];
+    const recipeNamesIndexes = new Array(recipeNames.length);
+    let recipes : Recipe[] = new Array();
+    for(var i = 0; i < recipeNames.length; i++){
+      recipeNamesIndexes[i] = 0;
+    }
     const ingredients: Array<Ingredient> = this.ingredientsService.getIngredients();
-    const recipeIngredients: RecipeIngredient[] = new Array();
-    const previousIndexes = new Array();
-    for (var i = 0 ; i <3 ;i++){
+    for(var j = 0; j < numberOfRecipes; j++){
+      const recipeIngredients: RecipeIngredient[] = new Array();
+      const previousIndexes = new Array();
+    for (var i = 0 ; i <numberOfIngredients ;i++){
       var index=Math.floor(Math.random() * ingredients.length)
       var quantity = Math.random() + 2;
       if(!previousIndexes.includes(index)){
         var ing : Ingredient = ingredients[index];
-        let recipeIngredient : RecipeIngredient = {id:i+1 , ingredient : ing, quantity: quantity};
+        let recipeIngredient : RecipeIngredient = {id:j*numberOfIngredients+i+1 , ingredient : ing, quantity: quantity};
         recipeIngredients.push(recipeIngredient);
         previousIndexes.push(index);
-        console.log(recipeIngredient);
       }
     }
-    let r1 : Recipe = {id: 1, name: 'bread', description: 'abc', ingredients: recipeIngredients};
-    let r2 : Recipe = {id: 2, name: 'pancakes', description: 'bcd', ingredients: recipeIngredients.slice() };
-    let r3 : Recipe = {id: 3, name: 'pizza', description: 'cde', ingredients: recipeIngredients.slice()};
-    let recipes : Recipe[] = [r1,r2,r3];
+    var index = Math.floor(Math.random()*recipeNames.length);
+    if(recipeNamesIndexes[index]==0){
+      let recipe : Recipe = {id: j+1, name: recipeNames[index], description: this.createDescription(numberOfDescriptionCharacters), ingredients: recipeIngredients};
+      recipeNamesIndexes[index]++;
+      recipes.push(recipe);
+    }
+    else{
+      let recipe : Recipe = {id: j+1, name: recipeNames[index]+'_'+recipeNamesIndexes[index], description: this.createDescription(numberOfDescriptionCharacters), ingredients: recipeIngredients};
+      recipeNamesIndexes[index]++;
+      recipes.push(recipe);
+    }
+  }
     return recipes;
   }
 }
