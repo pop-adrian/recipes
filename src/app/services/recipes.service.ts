@@ -40,7 +40,7 @@ export class RecipesService {
       var quantity = Math.random() + 2;
       if(!previousIndexes.includes(index)){
         var ing : Ingredient = ingredients[index];
-        let recipeIngredient : RecipeIngredient = {id:j*numberOfIngredients+i+1 , ingredient : ing, quantity: quantity};
+        let recipeIngredient : RecipeIngredient = {id:j*numberOfIngredients+i+1, ingredientId: ing.id, ingredient : ing, quantity: quantity};
         recipeIngredients.push(recipeIngredient);
         previousIndexes.push(index);
       }

@@ -27,10 +27,12 @@ export class EditRecipeComponent implements OnInit {
         description: 'descriprion',
         ingredients: [{
           id: 1,
+          ingredientId: this.ingredients[0].id,
           ingredient:this.ingredients[0],
           quantity: 4 } , 
           {
           id: 2,
+          ingredientId: this.ingredients[1].id,
           ingredient:this.ingredients[1],
           quantity: 2      
         }  ]
@@ -38,20 +40,10 @@ export class EditRecipeComponent implements OnInit {
 
     this.currentIngredient = {
         id: this.getNewRecipeIngredientId(),
+        ingredientId: this.ingredients[1].id,
         ingredient:this.ingredients[1],
         quantity: 0,
       }  
-  }
-
-  ngOnChanges(change : SimpleChange){
-      if (change["currentRecipe"].currentValue){       
-        var newIngredients=change["currentRecipe"].currentValue.ingredients;
-        newIngredients.forEach(element =>{
-          console.log(element);
-          if (this.ingredients && !this.ingredients.includes(element.ingredient))
-            this.ingredients.push(element.ingredient);
-        });
-      }
   }
 
   removeIngredient(recipeIngredient){  
@@ -86,6 +78,7 @@ export class EditRecipeComponent implements OnInit {
     this.currentIngredient = {
       id: this.getNewRecipeIngredientId(),
       ingredient:this.ingredients[1],
+      ingredientId: this.ingredients[1].id,
       quantity: 0      
     }  
     console.log(this.currentRecipe)

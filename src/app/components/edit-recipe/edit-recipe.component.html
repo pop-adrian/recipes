@@ -3,8 +3,8 @@
         <div *ngFor="let recipeIngredient of currentRecipe.ingredients" class="editContaier">
             
             <mat-form-field value="recipeIngredient">
-                <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredient">
-                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                <mat-select *ngIf="ingredients" [(value)]="recipeIngredient.ingredientId">
+                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient.id">
                         {{ingredient.name}}  </mat-option>
                 </mat-select>
             </mat-form-field>     
