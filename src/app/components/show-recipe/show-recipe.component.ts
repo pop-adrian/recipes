@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import {MatCardModule} from '@angular/material/card';
 
@@ -10,9 +10,17 @@ import {MatCardModule} from '@angular/material/card';
 export class ShowRecipeComponent implements OnInit {
 
   @Input() recipe : Recipe;
+  @Output() editRecipe = new EventEmitter<Recipe>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  changeToEditMode(){
+    this.editRecipe.emit(this.recipe);
+    console.log("edit recipe fired");
+   
+  }
+  
 }

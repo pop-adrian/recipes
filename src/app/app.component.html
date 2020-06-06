@@ -5,16 +5,15 @@
   </h1>  
 </div>
 
-<div class="container">
+<div class="container" >
     <div class="first">
       <app-recipe-list (selectedRecipeChanged)="recipeChanged($event)"></app-recipe-list>
     </div>
 
     <div class="second">
-      <app-show-recipe [recipe]="selectedRecipe"></app-show-recipe>
+      <app-show-recipe *ngIf="showTheRecipe==true" [(recipe)]="selectedRecipe" (editRecipe)="showEditComponent($event)"></app-show-recipe>
+      <app-edit-recipe *ngIf="showTheRecipe==false" [(currentRecipe)]="selectedRecipe" (showRecipe)="showMyRecipe($event)"></app-edit-recipe>      
     </div>
 </div>
-
-<app-edit-recipe [currentRecipe]="selectedRecipe"></app-edit-recipe>
 
 <router-outlet></router-outlet>

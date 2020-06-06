@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
@@ -13,6 +13,7 @@ import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 export class EditRecipeComponent implements OnInit {
   
   @Input() currentRecipe: Recipe;
+  @Output() showRecipe = new EventEmitter<Recipe>();
   ingredients: Array<Ingredient>;
   currentIngredient: RecipeIngredient;
 
@@ -20,24 +21,6 @@ export class EditRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.ingredients=this.ingredientServ.getIngredients();
-     
-    this.currentRecipe={
-        id: 1,
-        name: 'recipe',
-        description: 'descriprion',
-        ingredients: [{
-          id: 1,
-          ingredientId: this.ingredients[0].id,
-          ingredient:this.ingredients[0],
-          quantity: 4 } , 
-          {
-          id: 2,
-          ingredientId: this.ingredients[1].id,
-          ingredient:this.ingredients[1],
-          quantity: 2      
-        }  ]
-      }
-
     this.currentIngredient = {
         id: this.getNewRecipeIngredientId(),
         ingredientId: this.ingredients[1].id,
@@ -85,6 +68,10 @@ export class EditRecipeComponent implements OnInit {
   }
   onChangedRecipe(someRecipe : Recipe){
     this.currentRecipe = someRecipe;
+  }
+  closeEditRecipe(){
+    this.showRecipe.emit(this.currentRecipe);
+    console.log("sendCloseShowRecipe");
   }
 
 }
