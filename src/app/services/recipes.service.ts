@@ -24,7 +24,8 @@ export class RecipesService {
   getRecipes(): Recipe[]{
     try{
       const recipes = JSON.parse(localStorage.getItem('recipes'));
-      return recipes;
+      if (recipes)
+        return recipes;
     }
     catch(e){
     const numberOfRecipes = 10;
