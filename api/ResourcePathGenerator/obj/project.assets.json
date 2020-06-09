@@ -74,19 +74,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Flore\\.nuget\\packages\\": {}
+    "C:\\Users\\adrian.pop\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Flore\\workSpace\\practica\\practica\\recipes\\api\\ResourcePathGenerator\\ResourcePathGenerator.csproj",
+      "projectUniqueName": "C:\\Users\\adrian.pop\\source\\repos\\recipies\\api\\ResourcePathGenerator\\ResourcePathGenerator.csproj",
       "projectName": "ResourcePathGenerator",
-      "projectPath": "C:\\Users\\Flore\\workSpace\\practica\\practica\\recipes\\api\\ResourcePathGenerator\\ResourcePathGenerator.csproj",
-      "packagesPath": "C:\\Users\\Flore\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Flore\\workSpace\\practica\\practica\\recipes\\api\\ResourcePathGenerator\\obj\\",
+      "projectPath": "C:\\Users\\adrian.pop\\source\\repos\\recipies\\api\\ResourcePathGenerator\\ResourcePathGenerator.csproj",
+      "packagesPath": "C:\\Users\\adrian.pop\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\adrian.pop\\source\\repos\\recipies\\api\\ResourcePathGenerator\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Flore\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\adrian.pop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -94,6 +98,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://ado/OptimaWeb/_packaging/OgControls/nuget/v3/index.json": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -134,7 +139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
