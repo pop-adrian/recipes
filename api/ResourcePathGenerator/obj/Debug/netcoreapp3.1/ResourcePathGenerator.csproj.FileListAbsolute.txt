@@ -1,0 +1,14 @@
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.exe
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.csprojAssemblyReference.cache
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.AssemblyInfoInputs.cache
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.AssemblyInfo.cs
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\Json.Net.dll
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.csproj.CopyComplete
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.deps.json
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.runtimeconfig.json
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.runtimeconfig.dev.json
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.dll
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\ResourcePathGenerator.pdb
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.dll
+C:\Users\Flore\workSpace\practica\practica\recipes\api\ResourcePathGenerator\obj\Debug\netcoreapp3.1\ResourcePathGenerator.pdb

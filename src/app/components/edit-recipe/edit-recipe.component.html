@@ -41,7 +41,7 @@
                 <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>
             </mat-select>
         </mat-form-field> 
-        <mat-form-field>
+        <mat-form-field *ngIf="ingredients">
             <mat-label>Quantity: </mat-label>
             <input matInput [(ngModel)]="currentIngredient.quantity" >
         </mat-form-field>
