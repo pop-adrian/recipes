@@ -7,13 +7,16 @@ using Recipes.Models;
 
 namespace Recipes.Context
 {
-  public class IngredientContext : DbContext
+  public class RecipesContext : DbContext
   {
-    public IngredientContext(DbContextOptions<IngredientContext> options)
+    public RecipesContext(DbContextOptions<RecipesContext> options)
         : base(options)
     {
     }
 
     public DbSet<Ingredient> Ingredients { get; set; }
+
+    public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+    public DbSet<Recipe> Recipes { get; set; }
   }
 }
