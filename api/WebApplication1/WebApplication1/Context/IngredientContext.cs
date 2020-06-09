@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
+using Recipes.Models;
 
-namespace WebApplication1.Context
+namespace Recipes.Context
 {
   public class IngredientContext : DbContext
   {
