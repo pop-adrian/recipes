@@ -20,13 +20,20 @@ export class EditRecipeComponent implements OnInit {
   constructor(private ingredientServ: IngredientsService) { }
 
   ngOnInit() {
-    this.ingredients=this.ingredientServ.getIngredients();
     this.currentIngredient = {
-        id: this.getNewRecipeIngredientId(),
-        ingredientId: this.ingredients[1].id,
-        ingredient:this.ingredients[1],
-        quantity: 0,
-      }  
+      id: 1,
+      ingredientId: 1,
+      ingredient:null,
+      quantity: 0,
+  }
+      this.ingredientServ.getIngredients().subscribe(data => { 
+        this.ingredients = data;  
+          this.currentIngredient = {
+          id: this.getNewRecipeIngredientId(),
+          ingredientId: this.ingredients[1].id,
+          ingredient:this.ingredients[1],
+          quantity: 0,
+      };}); 
   }
 
   removeIngredient(recipeIngredient){  
@@ -36,6 +43,7 @@ export class EditRecipeComponent implements OnInit {
   }
 
   getNewRecipeIngredientId(){
+    
     if (this.currentRecipe.ingredients.length==0){
       return 1;
     }

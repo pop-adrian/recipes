@@ -24,7 +24,7 @@ export class RecipesService {
   getRecipes(): Recipe[]{
     try{
       const recipes = JSON.parse(localStorage.getItem('recipes'));
-      if (recipes)
+      if (recipes.length)
         return recipes;
     }
     catch(e){
@@ -37,7 +37,8 @@ export class RecipesService {
     for(var i = 0; i < recipeNames.length; i++){
       recipeNamesIndexes[i] = 0;
     }
-    const ingredients: Array<Ingredient> = this.ingredientsService.getIngredients();
+    var ingredients: Ingredient[];
+    this.ingredientsService.getIngredients().subscribe(data => { ingredients = data; } );
     for(var j = 0; j < numberOfRecipes; j++){
       const recipeIngredients: RecipeIngredient[] = new Array();
       const previousIndexes = new Array();

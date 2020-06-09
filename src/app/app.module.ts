@@ -10,6 +10,7 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ShowRecipeComponent } from './components/show-recipe/show-recipe.component';
 import {MatCardModule} from '@angular/material/card';
@@ -30,6 +31,7 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatInputModule,
     MatCardModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

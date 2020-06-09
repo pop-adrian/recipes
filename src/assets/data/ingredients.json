@@ -1,0 +1,17 @@
+[ {
+    "id": 1,
+    "name": "flour"
+  },
+  {
+    "id": 2,
+    "name": "onion"
+  },
+  {
+    "id": 3,
+    "name": "tomatoes"
+  },
+  {
+    "id": 4,
+    "name": "potatoes"
+  }
+]
