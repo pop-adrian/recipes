@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
 
 
 @Component({
@@ -43,7 +44,6 @@ export class EditRecipeComponent implements OnInit {
   }
 
   getNewRecipeIngredientId(){
-    
     if (this.currentRecipe.ingredients.length==0){
       return 1;
     }
