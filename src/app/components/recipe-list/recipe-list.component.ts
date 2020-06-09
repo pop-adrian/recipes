@@ -17,7 +17,7 @@ export class RecipeListComponent implements OnInit {
   @Output() selectedRecipeChanged = new EventEmitter();
 
   ngOnInit() {
-      this.recipes = this.service.getRecipes();
+      this.service.getRecipes().subscribe(data => this.recipes = data);
   }
 
   handleSelection(event) : void{

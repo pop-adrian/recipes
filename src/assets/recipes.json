@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "name": "bread",
+        "description": "asdafdsfdsf",
+        "ingredients": [
+            {
+                "id": 1,
+                "ingredientId": 1,
+                "ingredient": {
+                    "id": 1,
+                    "name": "flour"
+                },
+                "quantity": 2.5
+            },
+            {
+                "id": 2,
+                "ingredientId": 2,
+                "ingredient": {
+                    "id": 2,
+                    "name": "tomatoes"
+                },
+                "quantity": 3.2
+            }
+        ]
+    },
+
+    {
+        "id": 2,
+        "name": "pancakes",
+        "description": "asdafdsfdsf",
+        "ingredients": [
+            {
+                "id": 1,
+                "ingredientId": 1,
+                "ingredient": {
+                    "id": 1,
+                    "name": "flour"
+                },
+                "quantity": 2.8
+            },
+            {
+                "id": 2,
+                "ingredientId": 2,
+                "ingredient": {
+                    "id": 2,
+                    "name": "tomatoes"
+                },
+                "quantity": 2.9
+            }
+        ]
+    },
+
+
+    {
+        "id": 3,
+        "name": "pizza",
+        "description": "asdafdsfdsf",
+        "ingredients": [
+            {
+                "id": 1,
+                "ingredientId": 1,
+                "ingredient": {
+                    "id": 1,
+                    "name": "flour"
+                },
+                "quantity": 1.5
+            },
+            {
+                "id": 2,
+                "ingredientId": 2,
+                "ingredient": {
+                    "id": 2,
+                    "name": "tomatoes"
+                },
+                "quantity": 1
+            }
+        ]
+    }
+]
