@@ -26,7 +26,9 @@ namespace Recipes.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            var result = await _context.Recipes.Include(r => r.Ingredients).ToListAsync();
+            result.ForEach(r => r.Ingredients.ForEach(recipeIngredient => recipeIngredient.Recipe = null));
+            return result;
         }
 
         // GET: api/Recipes/5
