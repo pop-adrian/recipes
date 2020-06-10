@@ -2,7 +2,7 @@ import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.compon
 import { FormsModule } from '@angular/forms';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ShowRecipeComponent } from './components/show-recipe/show-recipe.component';
 import {MatCardModule} from '@angular/material/card';
+import { environment } from 'src/environments/environment';
+import { APP_BASE_HREF } from '@angular/common';
 
 
 
@@ -35,7 +37,12 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: APP_BASE_HREF,
+      useValue: environment.apiRoot,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

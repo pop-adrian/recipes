@@ -40,6 +40,8 @@ namespace WebApplication1
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -50,6 +52,8 @@ namespace WebApplication1
             {
                 endpoints.MapControllers();
             });
-        }
+
+           
+    }
     }
 }

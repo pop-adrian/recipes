@@ -4,13 +4,13 @@ import {Ingredient} from '../models/ingredient.model';
 import { RecipeIngredient } from '../models/recipe-ingredient.model';
 import { IngredientsService } from './ingredients.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService {
-
-  private _url : string = "assets/recipes.json";
+  private _url : string =environment.apiRoot+"api/Recipes";
 
   constructor(private ingredientsService:  IngredientsService, private httpClient : HttpClient) { }
 
