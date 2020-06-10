@@ -80,7 +80,6 @@ export class EditRecipeComponent implements OnInit {
   }
   closeEditRecipe(){
     this.showRecipe.emit(this.currentRecipe);
-
     console.log("sendCloseShowRecipe");
   }
 

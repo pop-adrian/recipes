@@ -15,7 +15,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipesService {
-  private _url : string =environment.apiRoot+"api/Recipes";
+  private _url : string =environment.apiRoot+"api/recipes";
 
   constructor(private ingredientsService:  IngredientsService, private httpClient : HttpClient) { }
 
@@ -43,7 +43,7 @@ export class RecipesService {
   updateRecipe(recipe : Recipe) : Observable<void>{
     var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
     var putURL = this._url+"/"+recipe.id;
-    return this.httpClient.put<void>(putURL, recipeDTO , {
+    return this.httpClient.put<void>(putURL, recipeDTO, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

@@ -35,29 +35,32 @@ namespace Recipes.Controllers
 
         // GET: api/Recipes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(int id)
+        public async Task<ActionResult<RecipeDTO>> GetRecipe(int id)
         {
             var recipe = await _context.Recipes.FindAsync(id);
+			recipe.Ingredients = _context.RecipeIngredients.Include(r => r.Ingredient).ToList().Where(x => x.RecipeId == id).ToList();
+			var recipeDTO = RecipeConverter.RecipeToRecipeDTO(recipe);
 
             if (recipe == null)
             {
                 return NotFound();
             }
 
-            return recipe;
+            return recipeDTO;
         }
 
         // PUT: api/Recipes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipe(int id, Recipe recipe)
+        public async Task<IActionResult> PutRecipe(int id, RecipeDTO recipeDTO)
         {
-            if (id != recipe.Id)
+            if (id != recipeDTO.Id)
             {
                 return BadRequest();
             }
-
+			Recipe recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
+			recipe.Ingredients.ForEach(ingredient => _context.Entry(ingredient).State = EntityState.Modified);
             _context.Entry(recipe).State = EntityState.Modified;
 
             try
