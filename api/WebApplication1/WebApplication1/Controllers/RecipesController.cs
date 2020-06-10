@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipes.Context;
 using Recipes.Models;
+using Recipes.Dtos;
+using Recipes.Converters;
 
 namespace Recipes.Controllers
 {
@@ -24,11 +26,11 @@ namespace Recipes.Controllers
 
         // GET: api/Recipes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
+        public ActionResult<IEnumerable<RecipeDTO>> GetRecipes()
         {
-            var result = await _context.Recipes.Include(r => r.Ingredients).ToListAsync();
-            result.ForEach(r => r.Ingredients.ForEach(recipeIngredient => recipeIngredient.Recipe = null));
-            return result;
+            var recipeIngredients = _context.RecipeIngredients.Include(r => r.Ingredient).ToList();
+            var result = _context.Recipes.Include(r => r.Ingredients).ToList();
+            return result.Select(x => RecipeConverter.RecipeToRecipeDTO(x)).ToList();
         }
 
         // GET: api/Recipes/5

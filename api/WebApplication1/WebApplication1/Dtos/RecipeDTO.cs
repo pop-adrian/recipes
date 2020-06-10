@@ -12,12 +12,4 @@ namespace Recipes.Dtos
     public string Description { get; set; }
     public RecipeIngredientDTO[] RecipeIngredients { get; set; }
   }
-
-  public class RecipeIngredientDTO
-  {
-    public int Id { get; set; }
-    public double Quantity { get; set; }
-    public int IngredientId { get; set; }
-    public string IngredientName { get; set; }
-  }
 }

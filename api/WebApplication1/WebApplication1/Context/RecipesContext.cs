@@ -36,16 +36,36 @@ namespace Recipes.Context
           Id = 1,
           Name = "bread",
           Description = "use flour",
+         },
+         new Recipe
+         {
+           Id=2,
+           Name = "pizza",
+           Description = "use potatoes and flour"
          }
         );
 
       modelBuilder.Entity<RecipeIngredient>().HasData(
-        new 
+        new RecipeIngredient
         {
            Id = 1,
            IngredientId = 1,
            Quantity = 2.5,
            RecipeId = 1
+        },
+        new RecipeIngredient
+        {
+          Id = 2,
+          IngredientId = 1,
+          Quantity = 2.0,
+          RecipeId = 2
+        },
+        new RecipeIngredient
+        {
+          Id = 3,
+          IngredientId = 2,
+          Quantity = 2.0,
+          RecipeId = 2
         }
         );
     }
