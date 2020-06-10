@@ -14,6 +14,42 @@ namespace Recipes.Context
     {
     }
 
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+      modelBuilder.Entity<Ingredient>().HasData(
+        new Ingredient
+        {
+          Id = 1,
+          Name = "potatoes"
+        },
+        new Ingredient
+        {
+          Id = 2,
+          Name = "flour"
+        }
+      );
+
+      modelBuilder.Entity<Recipe>().HasData(
+         new Recipe
+         {
+          Id = 1,
+          Name = "bread",
+          Description = "use flour",
+         }
+        );
+
+      modelBuilder.Entity<RecipeIngredient>().HasData(
+        new 
+        {
+           Id = 1,
+           IngredientId = 1,
+           Quantity = 2.5,
+           RecipeId = 1
+        }
+        );
+    }
+
     public DbSet<Ingredient> Ingredients { get; set; }
 
     public DbSet<RecipeIngredient> RecipeIngredients { get; set; }

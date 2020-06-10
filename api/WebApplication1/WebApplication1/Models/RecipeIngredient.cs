@@ -12,6 +12,10 @@ namespace Recipes.Models
     public Ingredient Ingredient { get; set; }
     public double Quantity { get; set; }
 
+    public int RecipeId { get; set; }
+
+    public Recipe Recipe { get; set; }
+
     public RecipeIngredient() { }
 
     public RecipeIngredient(int id, int ingId, Ingredient ing, double quantity)

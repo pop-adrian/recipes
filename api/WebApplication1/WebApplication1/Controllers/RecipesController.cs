@@ -16,24 +16,10 @@ namespace Recipes.Controllers
     {
         private readonly RecipesContext _context;
 
-        private void AddHardcodedData()
-        {
-          Ingredient i1 = new Ingredient(6, "tomatoes");
-          Ingredient i2 = new Ingredient(7, "flour");
-          RecipeIngredient ri1 = new RecipeIngredient(6, 1, i1, 2.5);
-          RecipeIngredient ri2 = new RecipeIngredient(7, 2, i2, 2.0);
-          List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
-          recipeIngredients.Add(ri1);
-          recipeIngredients.Add(ri2);
-          Recipe r1 = new Recipe(1, "bread", "asdadad", recipeIngredients);
-          _context.Recipes.Add(r1);
-          _context.SaveChanges();
-        }
-
         public RecipesController(RecipesContext context)
         {
             _context = context;
-            AddHardcodedData();
+            _context.Database.EnsureCreated();
         }
 
         // GET: api/Recipes
