@@ -79,10 +79,13 @@ export class EditRecipeComponent implements OnInit {
     this.currentRecipe = someRecipe;
   }
   closeEditRecipe(){
-    this.recipeService.updateRecipe(this.currentRecipe);
     this.showRecipe.emit(this.currentRecipe);
 
     console.log("sendCloseShowRecipe");
+  }
+
+  updateRecipe(){
+    this.recipeService.updateRecipe(this.currentRecipe);
   }
 
 }
