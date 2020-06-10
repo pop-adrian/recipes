@@ -15,7 +15,7 @@ namespace Recipes.Converters
       recipeDTO.Id = recipe.Id;
       recipeDTO.Name = recipe.Name;
       recipeDTO.Description = recipe.Description;
-      recipeDTO.RecipeIngredients = recipe.Ingredients.Select(x =>
+      recipeDTO.Ingredients = recipe.Ingredients.Select(x =>
       {
         RecipeIngredientDTO riDTO = new RecipeIngredientDTO();
         riDTO.Id = x.Id;

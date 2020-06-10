@@ -4,6 +4,7 @@ import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { RecipesService } from 'src/app/services/recipes.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class EditRecipeComponent implements OnInit {
   ingredients: Array<Ingredient>;
   currentIngredient: RecipeIngredient;
 
-  constructor(private ingredientServ: IngredientsService) { }
+  constructor(private ingredientServ: IngredientsService, private recipeService : RecipesService) { }
 
   ngOnInit() {
     this.currentIngredient = {
@@ -78,7 +79,9 @@ export class EditRecipeComponent implements OnInit {
     this.currentRecipe = someRecipe;
   }
   closeEditRecipe(){
+    this.recipeService.updateRecipe(this.currentRecipe);
     this.showRecipe.emit(this.currentRecipe);
+
     console.log("sendCloseShowRecipe");
   }
 
