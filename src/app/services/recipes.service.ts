@@ -5,6 +5,11 @@ import { RecipeIngredient } from '../models/recipe-ingredient.model';
 import { IngredientsService } from './ingredients.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Converter } from '../models/converters/recipe.converter';
+import { RecipeDTO } from  "../models/dtos/recipe.DTO";
+import { Observable, Subject } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +29,15 @@ export class RecipesService {
     return result;
  }
 
-  getRecipes(){
-    return this.httpClient.get<Recipe[]>(this._url);
+  getRecipes() : Observable<Recipe[]>{
+    var allRecipes : Subject<Recipe[]> = new Subject();
+    this.ingredientsService.getIngredients().subscribe(ingredients => { 
+      this.httpClient.get<RecipeDTO[]>(this._url).subscribe(recipes =>{ 
+          var result = recipes.map(dto => Converter.convert(dto, ingredients));
+          allRecipes.next(result);
+        });
+   });
+    return allRecipes;
   }
   //   try{
   //     const recipes = JSON.parse(localStorage.getItem('recipes'));
