@@ -49,5 +49,14 @@ export class RecipesService {
       })
     });
   }
+  saveNewRecipe(recipe: Recipe){
+    // var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
+    // var putURL = this._url+"/";
+    // return this.httpClient.post<void>(putURL, recipeDTO, {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json'
+    //   })
+    // });
+  }
 }
 

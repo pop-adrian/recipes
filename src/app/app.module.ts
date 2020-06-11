@@ -16,7 +16,8 @@ import { ShowRecipeComponent } from './components/show-recipe/show-recipe.compon
 import {MatCardModule} from '@angular/material/card';
 import { environment } from 'src/environments/environment';
 import { APP_BASE_HREF } from '@angular/common';
-
+import { AddRecipeDialogComponent } from './add-recipe-dialog/add-recipe-dialog.component';
+import { MatDialogModule } from '@angular/material';
 
 
 @NgModule({
@@ -25,6 +26,10 @@ import { APP_BASE_HREF } from '@angular/common';
     RecipeListComponent,
     EditRecipeComponent,
     ShowRecipeComponent,
+    AddRecipeDialogComponent,
+  ],
+  entryComponents: [
+    AddRecipeDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { APP_BASE_HREF } from '@angular/common';
     MatInputModule,
     MatCardModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     { 

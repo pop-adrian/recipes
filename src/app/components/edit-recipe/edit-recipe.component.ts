@@ -32,8 +32,8 @@ export class EditRecipeComponent implements OnInit {
         this.ingredients = data;  
           this.currentIngredient = {
           id: this.getNewRecipeIngredientId(),
-          ingredientId: this.ingredients[1].id,
-          ingredient:this.ingredients[1],
+          ingredientId: this.ingredients[0].id,
+          ingredient:this.ingredients[0],
           quantity: 0,
       };}); 
   }
@@ -45,7 +45,7 @@ export class EditRecipeComponent implements OnInit {
   }
 
   getNewRecipeIngredientId(){
-    if (this.currentRecipe.ingredients.length==0){
+    if (!this.currentRecipe || !this.currentRecipe.ingredients || this.currentRecipe.ingredients.length==0){
       return 1;
     }
     var lastIngredient=this.currentRecipe.ingredients.reduce((accum, ingr2)=>{
@@ -56,6 +56,7 @@ export class EditRecipeComponent implements OnInit {
     return lastIngredient.id+1;
   }
   addIngredient(){   
+    debugger;
     var noMatches=this.currentRecipe.ingredients.filter(recipeIngredient=>{     
       return recipeIngredient.ingredient.id==this.currentIngredient.ingredient.id}).length;
     if (noMatches>0){          
