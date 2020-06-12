@@ -62,8 +62,8 @@ export class AppComponent {
         addedRecipe : new Subject<Recipe>().subscribe(r => 
           { this.recipeService.subject.next(r);})
     },
-      height: '600px',
-      width: '600px',
+      height: '500px',
+      width: '525px',
   });
   }
 }

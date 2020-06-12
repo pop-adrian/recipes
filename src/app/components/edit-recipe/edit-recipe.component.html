@@ -19,8 +19,9 @@
         <div *ngFor="let recipeIngredient of currentRecipe.ingredients" class="editContaier">
             
              <mat-form-field>
+                <mat-label>Ingredient</mat-label>
                 <mat-select matNativeControl [(value)]="recipeIngredient.ingredientId">
-                    <mat-label>Ingredient</mat-label>
+
                     <mat-option *ngFor="let ingredient of ingredients" [(value)]="ingredient.id">
                         {{ingredient.name}}  </mat-option>
                 </mat-select>
@@ -40,6 +41,7 @@
     <br>
     <div class="addContainer">
         <mat-form-field >
+            <mat-label>Add Ingredient</mat-label>
             <mat-select [(value)]="currentIngredient.ingredient">
                 <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient"> {{ingredient.name}}  </mat-option>
             </mat-select>
@@ -53,7 +55,7 @@
 
     <div class="wrapperDiv">
     <button *ngIf="currentRecipe.id!=0" color="primary" mat-raised-button class="buttonDiv2" id="closeEdit" (click)="closeEditRecipe()">Close</button>
-    <button *ngIf="currentRecipe.id!=0" color="primary" mat-raised-button  class="buttonDiv2" id="buttonUpdate" (click)="updateRecipe()">Update</button>
+    <button *ngIf="currentRecipe.id!=0" color="primary" mat-raised-button  id="buttonDiv2" (click)="updateRecipe()">Update</button>
     <button *ngIf="currentRecipe.id==0" color="primary" mat-raised-button class="buttonDiv2" id="closeSave" matDialogClose>Close</button>
     <button *ngIf="currentRecipe.id==0" color="primary" mat-raised-button class="buttonDiv2" id="buttonSaveRecipe" (click)="saveNewRecipe()">Save</button>
     </div>  

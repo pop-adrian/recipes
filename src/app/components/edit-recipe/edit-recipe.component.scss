@@ -8,7 +8,7 @@
 
 .buttonDiv2{
     align-content: flex-start;
-    width: 32px;
+    width: 50px;
 }
 .buttonDiv:hover{
     cursor: pointer;
@@ -40,6 +40,7 @@
 
 .wrapperDiv{
     display:flex;
+    width: 400px;
 }
 
 #closeEdit{
@@ -50,12 +51,6 @@
 #closeSave{
     align-content: center;
     margin-right: 16px;
-}
-
-#buttonUpdate{
-    margin-right: 10px;
-    width: 100px;
-    text-align: left;
 }
 
 #matDivider{
