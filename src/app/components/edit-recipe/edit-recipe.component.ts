@@ -3,7 +3,7 @@ import { Recipe } from 'src/app/models/recipe.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
-import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatListModule } from '@angular/material';
 import { RecipesService } from 'src/app/services/recipes.service';
 
 
@@ -56,7 +56,6 @@ export class EditRecipeComponent implements OnInit {
     return lastIngredient.id+1;
   }
   addIngredient(){   
-    debugger;
     var noMatches=this.currentRecipe.ingredients.filter(recipeIngredient=>{     
       return recipeIngredient.ingredient.id==this.currentIngredient.ingredient.id}).length;
     if (noMatches>0){          
@@ -66,7 +65,11 @@ export class EditRecipeComponent implements OnInit {
     if (this.currentIngredient.quantity<=0){
       alert("Quantity is not valid!");
       return;
-    }  
+    } 
+    this.currentIngredient.quantity = <number>this.currentIngredient.quantity;
+    console.log("aici1");
+    console.log(typeof this.currentIngredient.quantity);
+    console.log("aici2");
     this.currentRecipe.ingredients.push(this.currentIngredient);
     this.currentIngredient = {
       id: this.getNewRecipeIngredientId(),

@@ -32,7 +32,7 @@ export class Converter{
                 return <RecipeIngredientDTO> {
                     id : ingred.id,
                     ingredientId : ingred.ingredientId,
-                    quantity : ingred.quantity
+                    quantity : ingred.quantity as number
                 }
             })
         }
