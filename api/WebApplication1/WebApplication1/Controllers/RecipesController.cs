@@ -66,6 +66,8 @@ namespace Recipes.Controllers
             {
                 return BadRequest();
             }
+			this.UpdateRecipe(recipeDTO);
+			/*
 			Recipe recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
 			recipe.Ingredients.ForEach(ingredient => _context.Entry(ingredient).State = EntityState.Modified);
             _context.Entry(recipe).State = EntityState.Modified;
@@ -85,10 +87,39 @@ namespace Recipes.Controllers
                     throw;
                 }
             }
-
+			*/
             return NoContent();
         }
-
+		private void UpdateRecipe(RecipeDTO recipeDTO)
+		{
+			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
+			var xmlIngredients = recipe.Ingredients.Select(ingredient =>
+			{
+				return
+				new XElement("recipeIngredient", new XAttribute("quantity", ingredient.Quantity),
+					new XAttribute("ingredientId", ingredient.IngredientId));
+			}).ToList();
+			var xmlRecipe = new XElement("recipeIngredients", xmlIngredients);
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+				{
+					connection.Open();
+					SqlCommand updateCommand = connection.CreateCommand();
+					updateCommand.CommandType = CommandType.StoredProcedure;
+					updateCommand.CommandText = "ssp_recipes_insert";
+					updateCommand.Parameters.Add(new SqlParameter("@name", recipe.Name));
+					updateCommand.Parameters.Add(new SqlParameter("@description", recipe.Description));
+					updateCommand.Parameters.Add(new SqlParameter("@ingredients", xmlRecipe.ToString()));
+					updateCommand.Parameters.Add(new SqlParameter("@rId", recipe.Id));
+					updateCommand.ExecuteNonQuery();
+				}
+			}
+			catch (SqlException exeption)
+			{
+				Console.WriteLine(exeption.Message);
+			}
+		}
         // POST: api/Recipes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -120,11 +151,11 @@ namespace Recipes.Controllers
 						});
 						await _context.SaveChangesAsync();
 			*/
-			insertNewRecipe(recipeDTO);
+			InsertNewRecipe(recipeDTO);
 			return "ok";
         }
 
-		public void insertNewRecipe(RecipeDTO recipeDTO)
+		public void InsertNewRecipe(RecipeDTO recipeDTO)
 		{
 			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
 			var xmlIngredients = recipe.Ingredients.Select(ingredient =>

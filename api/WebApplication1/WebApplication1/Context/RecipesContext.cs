@@ -7,16 +7,19 @@ using Recipes.Models;
 
 namespace Recipes.Context
 {
-  public class RecipesContext : DbContext
-  {
-    public RecipesContext(DbContextOptions<RecipesContext> options)
-        : base(options)
-    {
-    }
+	public class RecipesContext : DbContext
+	{
+		public RecipesContext(DbContextOptions<RecipesContext> options)
+			: base(options)
+		{
+		}
 
-		/*
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			//modelBuilder.Entity<Recipe>().MapToStoredProcedures(rec => rec.Insert(x => x.HasName("ssp_recipes_insert", "dbo")));
+
+			/*
 			modelBuilder.Entity<Ingredient>().HasKey(ingredient => ingredient.Id);
 			modelBuilder.Entity<Ingredient>().HasData(
 			  new Ingredient
@@ -75,11 +78,12 @@ namespace Recipes.Context
 				RecipeId = 2
 			}
 			);
+			*/
 		}
-		*/
-    public DbSet<Ingredient> Ingredients { get; set; }
 
-    public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
-    public DbSet<Recipe> Recipes { get; set; }
-  }
+		public DbSet<Ingredient> Ingredients { get; set; }
+
+		public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+		public DbSet<Recipe> Recipes { get; set; }
+	}
 }
