@@ -1,9 +1,6 @@
 .buttonDiv{
-  
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    padding: 30px;
+    align-content: flex-start;
+    width: 16px;
 }
 .buttonDiv:hover{
     cursor: pointer;
@@ -37,7 +34,22 @@
     display:flex;
 }
 
+#closeEdit{
+    align-content: center;
+    margin-right: 16px;
+}
+
+#update{
+    margin-right: 10px;
+    width: 32px;
+    text-align: left;
+}
 .buttonUpdate{
-    margin-left: 8vw;
+    margin-left: 128vw;
     cursor: pointer;
+}
+
+#matDivider{
+    width: 400px;
+    background-color: purple;
 }

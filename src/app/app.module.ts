@@ -18,6 +18,8 @@ import { environment } from 'src/environments/environment';
 import { APP_BASE_HREF } from '@angular/common';
 import { AddRecipeDialogComponent } from './add-recipe-dialog/add-recipe-dialog.component';
 import { MatDialogModule } from '@angular/material';
+import {MatFormFieldModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { MatDialogModule } from '@angular/material';
     MatCardModule,
     HttpClientModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
   ],
   providers: [
     { 

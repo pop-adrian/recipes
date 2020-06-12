@@ -19,6 +19,15 @@
 .b{
     float:right;
 }
-.buttonDiv:hover{
-    cursor: pointer;
+
+#description{
+    margin-top: 10px;
+}
+
+
+.buttonDiv{
+    width: 32px;
+    align-content: stretch;
+    text-align: center;
+    margin-top: 16px;
 }

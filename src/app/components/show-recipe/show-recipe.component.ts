@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material';
 
 @Component({
   selector: 'app-show-recipe',
