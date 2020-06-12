@@ -14,7 +14,7 @@ namespace Recipes.Context
     {
     }
 
-
+		/*
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Ingredient>().HasKey(ingredient => ingredient.Id);
@@ -76,7 +76,7 @@ namespace Recipes.Context
 			}
 			);
 		}
-
+		*/
     public DbSet<Ingredient> Ingredients { get; set; }
 
     public DbSet<RecipeIngredient> RecipeIngredients { get; set; }

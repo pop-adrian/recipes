@@ -17,10 +17,15 @@ namespace WebApplication1
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+		public string ConnectionString;
+
+		public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+			ConnectionString = configuration.GetConnectionString("myConnection");
+			//ConnectionString = "Server=DESKTOP-JGO467Q\\SQLEXPRESS;Database=Recipes;Trusted_Connection=True;";
+
+		}
 
         public IConfiguration Configuration { get; }
 
@@ -28,7 +33,7 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RecipesContext>(opt =>
-            opt.UseInMemoryDatabase("IngredientsList"));
+            opt.UseSqlServer(this.ConnectionString));
             services.AddControllers();
         }
 
