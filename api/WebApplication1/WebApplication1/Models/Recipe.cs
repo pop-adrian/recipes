@@ -25,5 +25,12 @@ namespace Recipes.Models
       Description = desc;
       Ingredients = ings;
     }
-  }
+
+    public Recipe(String name, String desc, List<RecipeIngredient> ings)
+	{
+		Name = name;
+		Description = desc;
+		Ingredients = ings;
+	}
+	}
 }

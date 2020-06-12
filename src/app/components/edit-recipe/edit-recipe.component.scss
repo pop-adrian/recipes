@@ -1,6 +1,14 @@
-.buttonDiv{
+#matCardWrapper{
+    width: 450px;
+}
+
+#descriptionInput{
+    width: 400px;
+}
+
+.buttonDiv2{
     align-content: flex-start;
-    width: 16px;
+    width: 32px;
 }
 .buttonDiv:hover{
     cursor: pointer;
@@ -39,17 +47,22 @@
     margin-right: 16px;
 }
 
-#update{
-    margin-right: 10px;
-    width: 32px;
-    text-align: left;
+#closeSave{
+    align-content: center;
+    margin-right: 16px;
 }
-.buttonUpdate{
-    margin-left: 128vw;
-    cursor: pointer;
+
+#buttonUpdate{
+    margin-right: 10px;
+    width: 100px;
+    text-align: left;
 }
 
 #matDivider{
-    width: 400px;
+    width: 482px;
     background-color: purple;
+}
+
+#wrapperEditRecipe{
+    border: 2px;
 }

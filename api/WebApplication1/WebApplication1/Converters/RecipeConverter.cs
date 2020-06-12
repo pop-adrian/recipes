@@ -29,13 +29,12 @@ namespace Recipes.Converters
 		public static Recipe RecipeDTOToRecipe(RecipeDTO recipeDTO)
 		{
 			Recipe recipe = new Recipe();
-			recipe.Id = recipeDTO.Id;
 			recipe.Name = recipeDTO.Name;
 			recipe.Description = recipeDTO.Description;
 			recipe.Ingredients = recipeDTO.Ingredients.Select(x =>
 			{
 				RecipeIngredient recipeIngredient = new RecipeIngredient();
-				recipeIngredient.Id = x.Id;
+				//recipeIngredient.Id = x.Id;
 				recipeIngredient.Quantity = x.Quantity;
 				recipeIngredient.RecipeId = recipeDTO.Id;
 				recipeIngredient.Recipe = recipe;

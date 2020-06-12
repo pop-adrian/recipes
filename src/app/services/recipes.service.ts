@@ -16,6 +16,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class RecipesService {
   private _url : string =environment.apiRoot+"api/recipes";
+  public subject: Subject<Recipe> = new Subject<Recipe>();
 
   constructor(private ingredientsService:  IngredientsService, private httpClient : HttpClient) { }
 
@@ -52,15 +53,24 @@ export class RecipesService {
     }).subscribe(recipe=> console.log(recipe));
   }
 
-  saveNewRecipe(recipe: Recipe) : void{
+  saveNewRecipe(recipe: Recipe) : Observable<Recipe>{
      console.log("intra in save");
+     var result: Subject<Recipe> = new Subject();
      var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
      console.log(recipeDTO);
-      this.httpClient.post<string>(this._url, recipeDTO,{
+     this.ingredientsService.getIngredients().subscribe(ingredients=>{
+      this.httpClient.post<RecipeDTO>(this._url, recipeDTO,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-     }).subscribe(data=>console.log(data));
+      
+     }).subscribe(data=>{
+        var convertedRecipe = Converter.convert(data,ingredients);
+        console.log(convertedRecipe);
+        result.next(convertedRecipe);
+      }
+      )});
+      return result;
   }
 }
 

@@ -86,7 +86,7 @@ namespace Recipes.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<string>> PostRecipe(RecipeDTO recipeDTO)
+        public async Task<ActionResult<RecipeDTO>> PostRecipe(RecipeDTO recipeDTO)
         {
 			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
 			var recipeIngredients = recipe.Ingredients.Select(a => new RecipeIngredient
@@ -112,8 +112,8 @@ namespace Recipes.Controllers
 				_context.RecipeIngredients.Add(recipeIngredient);
 			});
 			await _context.SaveChangesAsync();
-
-			return "ok";
+			Recipe recipe1 = _context.Recipes.Last();
+			return RecipeConverter.RecipeToRecipeDTO(recipe1);
         }
 
         // DELETE: api/Recipes/5

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Optional, Inject } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from '../../services/ingredients.service'; 
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
-import { MatInputModule, MatFormFieldModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatListModule, MatDialogRef,MAT_DIALOG_DATA } from '@angular/material';
 import { RecipesService } from 'src/app/services/recipes.service';
 
 
@@ -16,10 +16,15 @@ export class EditRecipeComponent implements OnInit {
   
   @Input() currentRecipe: Recipe;
   @Output() showRecipe = new EventEmitter<Recipe>();
+  @Output() addedRecipe = new EventEmitter<Recipe>();
   ingredients: Array<Ingredient>;
   currentIngredient: RecipeIngredient;
 
-  constructor(private ingredientServ: IngredientsService, private recipeService : RecipesService) { }
+  constructor(@Optional() public dialogRef: MatDialogRef<EditRecipeComponent>, private ingredientServ: IngredientsService, private recipeService : RecipesService, @Optional() @Inject(MAT_DIALOG_DATA) public data  )
+  {
+      if(data!=null)
+        this.currentRecipe = data.currentRecipe;
+  }
 
   ngOnInit() {
     this.currentIngredient = {
@@ -67,9 +72,6 @@ export class EditRecipeComponent implements OnInit {
       return;
     } 
     this.currentIngredient.quantity = <number>this.currentIngredient.quantity;
-    console.log("aici1");
-    console.log(typeof this.currentIngredient.quantity);
-    console.log("aici2");
     this.currentRecipe.ingredients.push(this.currentIngredient);
     this.currentIngredient = {
       id: this.getNewRecipeIngredientId(),
@@ -91,4 +93,16 @@ export class EditRecipeComponent implements OnInit {
     this.recipeService.updateRecipe(this.currentRecipe);
   }
 
+  saveNewRecipe(){
+    if(this.currentRecipe.name=="" || this.currentRecipe.description=="")
+      alert("Name and description cannot remain empty");
+    if(this.currentRecipe.ingredients.length==0)
+      alert("The recipe has to have some ingredients");
+    else{
+      this.recipeService.saveNewRecipe(this.currentRecipe).subscribe(recipe => {
+        console.log("save edit");
+        console.log(recipe);
+        this.data.addedRecipe.next(recipe)});
+    }
+  }
 }

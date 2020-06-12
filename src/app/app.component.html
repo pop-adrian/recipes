@@ -15,6 +15,6 @@
       <app-edit-recipe *ngIf="showTheRecipe==false" [(currentRecipe)]="selectedRecipe" (showRecipe)="showMyRecipe($event)"></app-edit-recipe>      
     </div>
 </div>
-<button color="primary" mat-raised-button class="buttonDiv" (click)="openAddRecipeDialog()">Add New Recipe</button>
+<button color="primary" mat-raised-button id="buttonAddNewRecipe" (click)="openAddRecipeDialog()">Add New Recipe</button>
 
 <router-outlet></router-outlet>
