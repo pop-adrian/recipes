@@ -2,7 +2,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
-//using System.Data.Entity.Core.Migrations
 
 namespace Recipes.Migrations
 {
@@ -74,63 +73,13 @@ namespace Recipes.Migrations
 						end
 				end'";
 
-			var connString = @"Server=DESKTOP-JGO467Q\SQLEXPRESS;Database=Recipes;Trusted_Connection=True;";
 			var query = string.Format("if (SELECT COUNT(*) FROM INFORMATION_SCHEMA.ROUTINES " +
 				" WHERE ROUTINE_NAME = 'ssp_recipes_insert') = 1 " +
 				" drop procedure ssp_recipes_insert;	" +
 				" EXECUTE sp_executesql N' "+
 				" create procedure {0}", upsertProc);
 
-			using (var conn = new SqlConnection(connString))
-			{
-				conn.Open();
-				using (var cmd = new SqlCommand(query, conn))
-				{
-					cmd.ExecuteNonQuery();
-				}
-			}
-
-			
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "RecipeIngredients",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "RecipeIngredients",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "RecipeIngredients",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Ingredients",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Recipes",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Recipes",
-                keyColumn: "Id",
-                keyValue: 2);
-				
+			migrationBuilder.Sql(query);
 		}
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -145,41 +94,7 @@ namespace Recipes.Migrations
 					cmd.ExecuteNonQuery();
 				}
 			}
-
-			migrationBuilder.InsertData(
-                table: "Ingredients",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "potatoes" },
-                    { 2, "flour" },
-                    { 3, "kiwi" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Recipes",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 1, "use flour", "bread" },
-                    { 2, "use potatoes and flour", "pizza" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "RecipeIngredients",
-                columns: new[] { "Id", "AlternativeIngredientId", "IngredientId", "Quantity", "RecipeId" },
-                values: new object[] { 1, null, 1, 2.5, 1 });
-
-            migrationBuilder.InsertData(
-                table: "RecipeIngredients",
-                columns: new[] { "Id", "AlternativeIngredientId", "IngredientId", "Quantity", "RecipeId" },
-                values: new object[] { 2, null, 1, 2.0, 2 });
-
-            migrationBuilder.InsertData(
-                table: "RecipeIngredients",
-                columns: new[] { "Id", "AlternativeIngredientId", "IngredientId", "Quantity", "RecipeId" },
-                values: new object[] { 3, null, 2, 2.0, 2 });
-				
+			
 		}
     }
 }
