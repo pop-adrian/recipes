@@ -35,7 +35,7 @@ namespace Recipes.Migrations
 		
 					EXEC sp_xml_preparedocument @hdoc OUTPUT, @ingredients;
 
-					declare @tempTable Table (IngrId int, quan int);
+					declare @tempTable Table (IngrId int, quan float);
 					insert into @tempTable (IngrId, quan)
 					select *
 					FROM OPENXML(@hdoc,'/recipeIngredients/recipeIngredient',1)   
@@ -52,7 +52,7 @@ namespace Recipes.Migrations
 					/* update new Ingredients */
 					update RecipeIngredients set IngredientId = (select tmp.IngrId from @tempTable tmp where IngredientId=tmp.IngrId),
 					Quantity = (select tmp.Quan from @tempTable tmp where IngredientId = tmp.IngrId)
-					where IngredientId in (select IngredientId from RecipeIngredients where RecipeId = @rId);
+					where RecipeId = @rId and IngredientId in (select IngredientId from RecipeIngredients where RecipeId = @rId);
 					end
 			end";
 
