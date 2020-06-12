@@ -40,23 +40,27 @@ export class RecipesService {
     return allRecipes;
   }
 
-  updateRecipe(recipe : Recipe) : Observable<void>{
+  updateRecipe(recipe : Recipe) : void{
+    console.log(recipe);
+
     var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
     var putURL = this._url+"/"+recipe.id;
-    return this.httpClient.put<void>(putURL, recipeDTO, {
+    this.httpClient.put(putURL, recipeDTO, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    });
+    }).subscribe(recipe=> console.log(recipe));
   }
-  saveNewRecipe(recipe: Recipe){
-    // var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
-    // var putURL = this._url+"/";
-    // return this.httpClient.post<void>(putURL, recipeDTO, {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json'
-    //   })
-    // });
+
+  saveNewRecipe(recipe: Recipe) : void{
+     console.log("intra in save");
+     var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
+     console.log(recipeDTO);
+      this.httpClient.post<string>(this._url, recipeDTO,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+     }).subscribe(data=>console.log(data));
   }
 }
 

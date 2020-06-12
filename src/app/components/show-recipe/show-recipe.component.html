@@ -5,7 +5,7 @@
             {{recipe.name}}
         </mat-card-header>
         <mat-divider></mat-divider>
-        <div>Decription: {{recipe.description}}</div>
+        <div id="description">Decription: {{recipe.description}}</div>
         <mat-list>
             <mat-list-item *ngFor="let ingredient of recipe.ingredients">
                 <div class="group">
@@ -18,7 +18,7 @@
                 </div>
             </mat-list-item>
         </mat-list>
-        <div class="buttonDiv"(click)="changeToEditMode()">Edit</div>
+        <button color="primary" mat-raised-button class="buttonDiv"(click)="changeToEditMode()">Edit</button>
     </mat-card>
     </div>
 </div>
