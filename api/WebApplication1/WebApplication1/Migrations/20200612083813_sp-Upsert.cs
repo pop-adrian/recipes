@@ -22,62 +22,43 @@ namespace Recipes.Migrations
 
 					INSERT INTO RecipeIngredients(RecipeId, IngredientId, Quantity)
 					select @recipeId, *
-					FROM OPENXML(@hdoc, ''/recipeIngredients/recipeIngredient'', 1)
-					WITH(ingredientId int ''@ingredientId'',
-					quantity float ''@quantity'');
+					FROM OPENXML(@hdoc, '/recipeIngredients/recipeIngredient', 1)
+					WITH(ingredientId int '@ingredientId',
+					quantity float '@quantity');
 
 					EXEC sp_xml_removedocument @hdoc;
 					return;
 					end
 				else
 					begin
-					update Recipes set Name = @name, Description = @description where Id = @rId;
-
+					update Recipes set Name = @name, Description=@description where Id=@rId;
+		
 					EXEC sp_xml_preparedocument @hdoc OUTPUT, @ingredients;
 
-					declare @tempTable Table(IngredientId int, quantity int);
-					insert into @tempTable(IngredientId, quantity)
-
-					select*
-					FROM OPENXML(@hdoc, ''/recipeIngredients/recipeIngredient'', 1)
-
-					WITH(ingredientId int ''@ingredientId'',
-					quantity float ''@quantity'');
+					declare @tempTable Table (IngrId int, quan int);
+					insert into @tempTable (IngrId, quan)
+					select *
+					FROM OPENXML(@hdoc,'/recipeIngredients/recipeIngredient',1)   
+					WITH ( ingredientId int '@ingredientId',
+						  quantity float '@quantity' );
 
 					EXEC sp_xml_removedocument @hdoc;
 					/*remove */
-					delete RecipeIngredients where(RecipeId = @rId and IngredientId not in (select IngredientId from @tempTable));
+					delete RecipeIngredients where ( RecipeId=@rId and RecipeIngredients.IngredientId not in (select IngrId from @tempTable));
+					/* insert new Ingredients */
+					insert into RecipeIngredients (RecipeId, IngredientId, Quantity) 
+					(select @rId, IngrId, quan from @tempTable where IngrId not in 
+					(select IngredientId from RecipeIngredients where RecipeId = @rId) );
+					/* update new Ingredients */
+					update RecipeIngredients set IngredientId = (select tmp.IngrId from @tempTable tmp where IngredientId=tmp.IngrId),
+					Quantity = (select tmp.Quan from @tempTable tmp where IngredientId = tmp.IngrId)
+					where IngredientId in (select IngredientId from RecipeIngredients where RecipeId = @rId);
+					end
+			end";
 
-					declare myCursor cursor for select* from @tempTable;
-					open myCursor;
-					declare @currentIngredientId int;
-					declare @currentIngredientQuantity int;
-
-					fetch next from myCursor into @currentIngredientId, @currentIngredientQuantity;
-					while @@FETCH_STATUS = 0
-						begin
-							if (select count(*) from RecipeIngredients where RecipeId = @rId and IngredientId = @currentIngredientId)= 0
-								/* insert new Ingredients */
-								insert into RecipeIngredients(RecipeId, IngredientId, Quantity)
-								values(@rId, @currentIngredientId, @currentIngredientQuantity);
-							else
-								/* update new Ingredients */
-								update RecipeIngredients set Quantity = @currentIngredientQuantity
-								where RecipeId = @rId and IngredientId = @currentIngredientId;
-
-							fetch next from myCursor into @currentIngredientId, @currentIngredientQuantity;
-						end
-
-				   close myCursor;
-						deallocate myCursor;
-						end
-				end'";
-
-			var query = string.Format("if (SELECT COUNT(*) FROM INFORMATION_SCHEMA.ROUTINES " +
-				" WHERE ROUTINE_NAME = 'ssp_recipes_insert') = 1 " +
-				" drop procedure ssp_recipes_insert;	" +
-				" EXECUTE sp_executesql N' "+
-				" create procedure {0}", upsertProc);
+			var query = string.Format("if (SELECT COUNT(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'ssp_recipes_insert') = 1 "+
+							" drop procedure ssp_recipes_insert; go " +
+							" create procedure {0}", upsertProc);
 
 			migrationBuilder.Sql(query);
 		}

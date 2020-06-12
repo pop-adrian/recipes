@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Recipes.Context;
@@ -13,7 +12,6 @@ using System.Xml.Linq;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-using System.Data.SqlTypes;
 
 namespace Recipes.Controllers
 {
@@ -93,13 +91,7 @@ namespace Recipes.Controllers
 		private void UpdateRecipe(RecipeDTO recipeDTO)
 		{
 			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
-			var xmlIngredients = recipe.Ingredients.Select(ingredient =>
-			{
-				return
-				new XElement("recipeIngredient", new XAttribute("quantity", ingredient.Quantity),
-					new XAttribute("ingredientId", ingredient.IngredientId));
-			}).ToList();
-			var xmlRecipe = new XElement("recipeIngredients", xmlIngredients);
+			var xmlRecipe = getXmlFromRecipe(recipe);
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(this.ConnectionString))
@@ -158,13 +150,7 @@ namespace Recipes.Controllers
 		public void InsertNewRecipe(RecipeDTO recipeDTO)
 		{
 			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
-			var xmlIngredients = recipe.Ingredients.Select(ingredient =>
-			{
-				return
-				new XElement("recipeIngredient", new XAttribute("quantity", ingredient.Quantity),
-					new XAttribute("ingredientId", ingredient.IngredientId));
-			}).ToList();
-			var xmlRecipe = new XElement("recipeIngredients", xmlIngredients);
+			var xmlRecipe = getXmlFromRecipe(recipe);
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(this.ConnectionString))
@@ -199,7 +185,16 @@ namespace Recipes.Controllers
 
             return recipe;
         }
-
+		private XElement getXmlFromRecipe(Recipe recipe)
+		{
+			var xmlIngredients = recipe.Ingredients.Select(ingredient =>
+			{
+				return
+				new XElement("recipeIngredient", new XAttribute("quantity", ingredient.Quantity),
+					new XAttribute("ingredientId", ingredient.IngredientId));
+			}).ToList();
+			return new XElement("recipeIngredients", xmlIngredients);
+		}
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
