@@ -64,28 +64,7 @@ namespace Recipes.Controllers
             {
                 return BadRequest();
             }
-			this.UpdateRecipe(recipeDTO);
-			/*
-			Recipe recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
-			recipe.Ingredients.ForEach(ingredient => _context.Entry(ingredient).State = EntityState.Modified);
-            _context.Entry(recipe).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RecipeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-			*/
+			this.UpdateRecipe(recipeDTO);		
             return NoContent();
         }
 		private void UpdateRecipe(RecipeDTO recipeDTO)
@@ -118,31 +97,6 @@ namespace Recipes.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> PostRecipe(RecipeDTO recipeDTO)
         {
-			/*			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
-						var recipeIngredients = recipe.Ingredients.Select(a => new RecipeIngredient
-						{
-							Id = a.Id,
-							IngredientId = a.IngredientId,
-							Ingredient = new Ingredient
-							{
-								Id = a.Ingredient.Id,
-								Name = a.Ingredient.Name
-							},
-							Quantity = a.Quantity,
-							RecipeId = a.RecipeId
-						}).ToList() ;
-
-						recipe.Ingredients = null;
-						_context.Recipes.Add(recipe);
-						await _context.SaveChangesAsync();
-
-						recipeIngredients.ForEach(recipeIngredient => {
-							recipeIngredient.RecipeId = recipe.Id;
-							_context.Entry(recipeIngredient.Ingredient).State = EntityState.Unchanged;
-							_context.RecipeIngredients.Add(recipeIngredient);
-						});
-						await _context.SaveChangesAsync();
-			*/
 			InsertNewRecipe(recipeDTO);
 			return "ok";
         }

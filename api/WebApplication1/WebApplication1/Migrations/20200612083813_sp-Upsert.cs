@@ -9,7 +9,7 @@ namespace Recipes.Migrations
     {		
 		protected override void Up(MigrationBuilder migrationBuilder)
         {
-			var upsertProc = @"ssp_recipes_insert @name NVARCHAR(100), @description NVARCHAR(200), @ingredients XML, @rId int = 0 as
+			var upsertProc = @"create procedure ssp_recipes_insert @name NVARCHAR(100), @description NVARCHAR(200), @ingredients XML, @rId int = 0 as
 				begin
 				declare @hdoc int;
 				if (@rId = 0)
@@ -57,25 +57,17 @@ namespace Recipes.Migrations
 					end
 			end";
 
-			var query = string.Format("if (SELECT COUNT(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'ssp_recipes_insert') = 1 "+
-							" drop procedure ssp_recipes_insert; go " +
-							" create procedure {0}", upsertProc);
+			var query = @"if (SELECT COUNT(*) FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'ssp_recipes_insert') = 1
+				  drop procedure ssp_recipes_insert;
+				  go " + upsertProc;
 
 			migrationBuilder.Sql(query);
 		}
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-			var connString = @"Server=DESKTOP-JGO467Q\SQLEXPRESS;Database=Recipes;Trusted_Connection=True;";
 			var query = string.Format("drop procedure ssp_recipes_insert;");
-			using (var conn = new SqlConnection(connString))
-			{
-				conn.Open();
-				using (var cmd = new SqlCommand(query, conn))
-				{
-					cmd.ExecuteNonQuery();
-				}
-			}
+			migrationBuilder.Sql(query);
 			
 		}
     }
