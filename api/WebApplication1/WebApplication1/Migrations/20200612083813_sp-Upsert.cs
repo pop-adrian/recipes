@@ -45,14 +45,15 @@ namespace Recipes.Migrations
 					EXEC sp_xml_removedocument @hdoc;
 					/*remove */
 					delete RecipeIngredients where ( RecipeId=@rId and RecipeIngredients.IngredientId not in (select IngrId from @tempTable));
+
+					/* update new Ingredients */
+					update RecipeIngredients set Quantity = (select tmp.Quan from @tempTable tmp where IngredientId = tmp.IngrId)
+					where RecipeId = @rId ;
+
 					/* insert new Ingredients */
 					insert into RecipeIngredients (RecipeId, IngredientId, Quantity) 
 					(select @rId, IngrId, quan from @tempTable where IngrId not in 
 					(select IngredientId from RecipeIngredients where RecipeId = @rId) );
-					/* update new Ingredients */
-					update RecipeIngredients set IngredientId = (select tmp.IngrId from @tempTable tmp where IngredientId=tmp.IngrId),
-					Quantity = (select tmp.Quan from @tempTable tmp where IngredientId = tmp.IngrId)
-					where RecipeId = @rId and IngredientId in (select IngredientId from RecipeIngredients where RecipeId = @rId);
 					end
 			end";
 
