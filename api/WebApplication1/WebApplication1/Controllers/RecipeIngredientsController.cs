@@ -19,7 +19,7 @@ namespace Recipes.Controllers
         public RecipeIngredientsController(RecipesContext context)
         {
             _context = context;
-            _context.Database.EnsureCreated();
+            //_context.Database.EnsureCreated();
         }
 
         // GET: api/RecipeIngredients

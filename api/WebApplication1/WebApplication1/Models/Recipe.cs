@@ -9,7 +9,7 @@ namespace Recipes.Models
 {
   public class Recipe
   {
-	[Key]
+	
 	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public String Name { get; set; }
