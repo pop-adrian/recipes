@@ -20,7 +20,6 @@ export class ShowRecipeComponent implements OnInit {
 
   changeToEditMode(){
     this.editRecipe.emit(this.recipe);
-    console.log("edit recipe fired");
    
   }
   

@@ -26,7 +26,7 @@ namespace Recipes.Converters
 			}).ToArray();
 			return recipeDTO;
 		}
-		public static Recipe RecipeDTOToRecipe(RecipeDTO recipeDTO)
+		public static Recipe RecipeDTOToRecipePOST(RecipeDTO recipeDTO)
 		{
 			Recipe recipe = new Recipe();
 			recipe.Name = recipeDTO.Name;
@@ -35,6 +35,25 @@ namespace Recipes.Converters
 			{
 				RecipeIngredient recipeIngredient = new RecipeIngredient();
 				//recipeIngredient.Id = x.Id;
+				recipeIngredient.Quantity = x.Quantity;
+				recipeIngredient.RecipeId = recipeDTO.Id;
+				recipeIngredient.Recipe = recipe;
+				recipeIngredient.IngredientId = x.IngredientId;
+				recipeIngredient.Ingredient = new Ingredient(x.IngredientId, x.IngredientName);
+				return recipeIngredient;
+			}).ToList();
+			return recipe;
+		}
+
+		public static Recipe RecipeDTOToRecipePUT(RecipeDTO recipeDTO)
+		{
+			Recipe recipe = new Recipe();
+			recipe.Name = recipeDTO.Name;
+			recipe.Description = recipeDTO.Description;
+			recipe.Ingredients = recipeDTO.Ingredients.Select(x =>
+			{
+				RecipeIngredient recipeIngredient = new RecipeIngredient();
+				recipeIngredient.Id = x.Id;
 				recipeIngredient.Quantity = x.Quantity;
 				recipeIngredient.RecipeId = recipeDTO.Id;
 				recipeIngredient.Recipe = recipe;

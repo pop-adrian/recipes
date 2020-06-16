@@ -79,14 +79,12 @@ export class EditRecipeComponent implements OnInit {
       ingredientId: this.ingredients[1].id,
       quantity: 0      
     }  
-    console.log(this.currentRecipe)
   }
   onChangedRecipe(someRecipe : Recipe){
     this.currentRecipe = someRecipe;
   }
   closeEditRecipe(){
     this.showRecipe.emit(this.currentRecipe);
-    console.log("sendCloseShowRecipe");
   }
 
   updateRecipe(){
@@ -100,8 +98,6 @@ export class EditRecipeComponent implements OnInit {
       alert("The recipe has to have some ingredients");
     else{
       this.recipeService.saveNewRecipe(this.currentRecipe).subscribe(recipe => {
-        console.log("save edit");
-        console.log(recipe);
         this.data.addedRecipe.next(recipe)});
     }
   }

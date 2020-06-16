@@ -59,7 +59,8 @@ namespace Recipes.Controllers
             {
                 return BadRequest();
             }
-			Recipe recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
+			Recipe recipe = RecipeConverter.RecipeDTOToRecipePUT(recipeDTO);
+			recipe.Id = id;
 			recipe.Ingredients.ForEach(ingredient => _context.Entry(ingredient).State = EntityState.Modified);
             _context.Entry(recipe).State = EntityState.Modified;
 
@@ -88,7 +89,7 @@ namespace Recipes.Controllers
         [HttpPost]
         public async Task<ActionResult<RecipeDTO>> PostRecipe(RecipeDTO recipeDTO)
         {
-			var recipe = RecipeConverter.RecipeDTOToRecipe(recipeDTO);
+			var recipe = RecipeConverter.RecipeDTOToRecipePOST(recipeDTO);
 			var recipeIngredients = recipe.Ingredients.Select(a => new RecipeIngredient
 			{
 				Id = a.Id,

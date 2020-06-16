@@ -42,8 +42,6 @@ export class RecipesService {
   }
 
   updateRecipe(recipe : Recipe) : void{
-    console.log(recipe);
-
     var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
     var putURL = this._url+"/"+recipe.id;
     this.httpClient.put(putURL, recipeDTO, {
@@ -54,10 +52,8 @@ export class RecipesService {
   }
 
   saveNewRecipe(recipe: Recipe) : Observable<Recipe>{
-     console.log("intra in save");
      var result: Subject<Recipe> = new Subject();
      var recipeDTO : RecipeDTO = Converter.recipeToRecipeDTO(recipe);
-     console.log(recipeDTO);
      this.ingredientsService.getIngredients().subscribe(ingredients=>{
       this.httpClient.post<RecipeDTO>(this._url, recipeDTO,{
       headers: new HttpHeaders({
@@ -66,7 +62,6 @@ export class RecipesService {
       
      }).subscribe(data=>{
         var convertedRecipe = Converter.convert(data,ingredients);
-        console.log(convertedRecipe);
         result.next(convertedRecipe);
       }
       )});
